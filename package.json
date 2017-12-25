@@ -1,0 +1,26 @@
+{
+  "name": "thingshub",
+  "version": "0.0.1",
+  "description": "IoT Managment application",
+  "main": "release.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/molda/ThingsHub.git"
+  },
+  "keywords": [
+    "iot",
+    "flow",
+    "total.js",
+    "dashboard",
+    "flowboard"
+  ],
+  "author": "Martin Smola",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/molda/ThingsHub/issues"
+  },
+  "homepage": "https://github.com/molda/ThingsHub#readme"
+}

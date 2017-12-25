@@ -1,0 +1,9 @@
+name						: ThingsHub
+version						: 1.0.0
+author						: Martin Smola
+
+total-home-admin			: admin:admin
+
+#default-ip					: 127.0.0.1
+
+module#flow	(Object)		: { sharedfiles: true }

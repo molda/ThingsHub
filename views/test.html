@@ -1,0 +1,123 @@
+@{layout('')}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartHome v@{config.version}</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=10" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="robots" content="all,follow" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700&subset=latin,latin-ext" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.24.2/codemirror.min.css" />
+	@{import('head', 'default.css', 'favicon.ico')}
+	<script>
+		// var managerurl="@{!CONFIG('manager-url')}";
+		// var currency='@{!config.custom.currency_entity}';
+		// var su=JSON.parse('@{json(user)}');
+		// var languages=JSON.parse('@{json(config.custom.languages)}');
+		// var signals=JSON.parse('@{json(config.custom.signals)}');
+	</script>
+	<style>
+		body { background-color: #fff; }
+	</style>
+</head>
+<body data-jc="exec,binder">
+
+	<header>
+		<div class="mainmenu">
+			<div><b>@{config.name}</b> v@{config.version}</div>
+			<a href="javascript:void(0)" data-exec="mainmenu" class="exec mainmenu-button"><i class="fa fa-navicon"></i></a>
+		</div>
+		<nav>
+			<a class="jrouting" href="/" title="@{config.name}"><i class="fa fa-home"></i></a>
+			<a class="jrouting" href="/flow/" title="Flow"><i class="fa fa-terminal"></i></a>
+			<a class="jrouting" href="/flowboard/" title="FlowBoard"><i class="fa fa-dashboard"></i></a>
+			<a class="jrouting" href="/dashboard/" title="DashBoard"><i class="fa fa-th"></i></a>
+			<a class="logoff" href="/logoff/" title="@(Sign out)"><i class="fa fa-sign-out"></i></a>
+		</nav>
+	</header>
+
+	<div id="body" style="padding: 150px 400px;">
+
+		<style>
+			.weekschedule {
+				height: 600px;
+			}
+			.weekschedule .day {
+				width: 12.5%;
+				height: 600px;
+				border: 1px solid lightgrey; 
+				float: left;
+			}
+			.weekschedule .hour {
+				height: 4.16%;	
+				border-bottom: 1px solid #e0e0e0;			
+			}
+			.weekschedule .qhour {
+				width: 100%;
+				height: 1.04%;
+				background-color: #eee;
+				border-bottom: 1px solid #e0e0e0;
+			}
+		</style>
+<!-- 		<div class="weekschedule" data-jc="weekschedule" data-jc-path="weekschedule">
+			
+		</div> -->
+
+
+		<script>
+
+		</script>
+
+		<div data-jc="textboxlist" data-jc-path="jobs" data-jc-config="maxlength:50;placeholder:enter value like '* 1 * * * * | day' and hit enter;icon:clock-o">Cron jobs</div>
+
+	</div>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	@{import('default.js')}
+	@{section('script')}
+
+	<script>
+			// COMPONENT('weekschedule', function(){
+			// 	var self = this;
+				
+			// 	self.make = function(){
+			// 		var hour = '<div class="hour">{0}</div>';
+			// 		var hoursCollumn = '<div class="day">';
+			// 		for (var i = 0; i < 24; i++) {
+			// 			hoursCollumn += hour.format((i < 10 ? '0' + i : i) + ':00');
+			// 		}
+			// 		hoursCollumn += '</div>';
+			// 		hoursCollumn += self.generateWeek();;
+			// 		self.element.html(hoursCollumn);
+			// 	};
+
+			// 	self.generateDay = function(dayIndex){
+			// 		var startIndex = dayIndex * 96;
+			// 		var elHour = '<div class="qhour{1}" data-id="{0}"></div>';
+			// 		var elDay = '<div class="day">';
+
+			// 		for (var i = 0; i < 96; i++) {
+			// 			elDay += elHour.format(startIndex + i, );
+			// 		};
+
+			// 		elDay += '</div>';
+			// 		return elDay;
+			// 	};
+
+			// 	self.generateWeek = function(){
+			// 		var week = '';
+			// 		for (var i = 0; i < 7; i++) {
+			// 			week += self.generateDay(i);
+			// 		};
+			// 		return week;					
+			// 	};
+			// });
+	</script>
+
+</body>
+</html>

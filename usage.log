@@ -1,0 +1,158 @@
+{
+    "framework": {
+        "id": null,
+        "datetime": "2017-12-24T20:47:51.468Z",
+        "pid": 6680,
+        "node": "v8.9.2",
+        "version": "v2.9.0",
+        "platform": "linux",
+        "processor": "x64",
+        "uptime": 0,
+        "memoryTotal": 18.88,
+        "memoryUsage": 12.67,
+        "memoryRss": 45.57,
+        "mode": "debug",
+        "port": 8000,
+        "ip": "0.0.0.0",
+        "directory": "/home/molda/Github/thingshub"
+    },
+    "counter": {
+        "resource": 0,
+        "controller": 2,
+        "module": 4,
+        "isomorphic": 0,
+        "cache": 0,
+        "worker": 0,
+        "connection": 0,
+        "schedule": 0,
+        "helpers": 4,
+        "error": 0,
+        "problem": 0,
+        "queue": 0,
+        "files": 2,
+        "notfound": 0,
+        "streaming": 0,
+        "modificator": 0,
+        "viewphrases": 0,
+        "uptodates": 0,
+        "defer": 0
+    },
+    "routing": {
+        "webpage": 8,
+        "sitemap": 0,
+        "websocket": 4,
+        "file": 4,
+        "middleware": 0,
+        "redirect": 0,
+        "mmr": 0
+    },
+    "stats": {
+        "other": {
+            "websocketPing": 0,
+            "websocketCleaner": 0,
+            "obsolete": 0,
+            "restart": 0,
+            "mail": 0
+        },
+        "request": {
+            "request": 0,
+            "pending": 0,
+            "web": 0,
+            "xhr": 0,
+            "file": 0,
+            "websocket": 0,
+            "get": 0,
+            "options": 0,
+            "head": 0,
+            "post": 0,
+            "put": 0,
+            "path": 0,
+            "upload": 0,
+            "schema": 0,
+            "mmr": 0,
+            "blocked": 0,
+            "delete": 0,
+            "mobile": 0,
+            "desktop": 0
+        },
+        "response": {
+            "view": 0,
+            "json": 0,
+            "websocket": 0,
+            "timeout": 0,
+            "custom": 0,
+            "binary": 0,
+            "pipe": 0,
+            "file": 0,
+            "image": 0,
+            "destroy": 0,
+            "stream": 0,
+            "streaming": 0,
+            "plain": 0,
+            "empty": 0,
+            "redirect": 0,
+            "forward": 0,
+            "notModified": 0,
+            "sse": 0,
+            "mmr": 0,
+            "errorBuilder": 0,
+            "error400": 0,
+            "error401": 0,
+            "error403": 0,
+            "error404": 0,
+            "error408": 0,
+            "error431": 0,
+            "error500": 0,
+            "error501": 0
+        }
+    },
+    "redirects": [],
+    "controllers": [
+        {
+            "name": "api",
+            "usage": null
+        },
+        {
+            "name": "default",
+            "usage": null
+        }
+    ],
+    "connections": [],
+    "modules": [
+        {
+            "name": "devices",
+            "usage": null
+        },
+        {
+            "name": "dashboard",
+            "usage": null
+        },
+        {
+            "name": "flowboard",
+            "usage": null
+        },
+        {
+            "name": "flow",
+            "usage": null
+        }
+    ],
+    "models": [],
+    "uptodates": null,
+    "helpers": [
+        "addons",
+        "DASHBOARD",
+        "FLOWBOARD",
+        "FLOW"
+    ],
+    "cache": [],
+    "resources": [],
+    "errors": [],
+    "problems": [],
+    "changes": [],
+    "files": [
+        "$directory-temp",
+        "$directory-databases"
+    ],
+    "streaming": [],
+    "other": []
+}

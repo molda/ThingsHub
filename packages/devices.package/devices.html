@@ -1,0 +1,102 @@
+<div class="">	
+    <a href="javascript:void(0)" data-exec="pagemenu" class="pagemenu exec"><i class="fa fa-navicon"></i></a>
+    <div class="toolbar">
+        <div class="container">
+            <div class="tabs">
+                <div data-jc="repeater" data-jc-path="common.tabs">
+                    <script type="text/html">
+                        <a href="#{{ linker }}" data-id="{{ id }}" data-b="common.tab" data-b-class="n => (n && n.id === common.tabs[{{ index }}].id ? '+' : '-') + 'selected +tab'">{{ name }}</a>
+                    </script>
+                </div>
+                <a href="javascript:void(0)" class="last exec" data-exec="#tabs.add"><i class="fa fa-plus-circle"></i></a>
+            </div>
+        </div>
+    </div>
+	<div class="container-fluid page">
+		<div class="row">
+			<div class="col-lg-9 col-md-12">
+				<div data-jc="grid" data-jc-path="deviceslist" data-jc-config="exec:filtering;autosize:false">
+					<script type="text/plain">
+						[
+							{ name: 'name', text: 'Device name', filter: false, size: 2, align: 'center' },
+							{ name: 'ip', text: 'IP', filter: false, size: 2, align: 'center' },
+							{ name: 'status', text: 'Status', filter: false, size: 3, align: 'center' },
+							{ name: 'last', text: 'Last status', filter: false, size: 2, format: 'HH:mm dd.MM.yyyy', align: 'center' },
+							{ name: '@(Options)', align: 'center', filter: false, sort: false, size: '48px', template: '<button class="btn-remove" name="remove" title="@(Remove)"><i class="fa fa-trash-o"></i></button>' }
+						]
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    var deviceslist = { page: 1, count: 0, pages: 1, limit: 100, items: [] };
+	var status_tmpl = '<i class="fa fa-circle {0}"></i> {1}';
+	var ip_tmpl = '<a href="http://{0}" target="_blank">{0}</a>';
+	var time_tmpl = '<span class="datetime" data-value="{0}">{1}</span>';
+	ON('message', function(msg){
+        if (msg.addon !== 'devices')
+            return;
+		if (msg.type === 'device') {
+				device_status(msg.data);
+		};
+		if (msg.type === 'devices') {
+			msg.items.forEach(function(d){
+				var data = format_device_data(d);
+				d.status = data.status;
+				d.ip = data.ip;
+				d.last = data.last;
+			});
+			SET('deviceslist', msg);
+		};
+	});
+
+    // Auto-resize
+    $(window).on('resize', function() {
+        setTimeout2('resize', function() {
+            EMIT('resize');
+        }, 100);
+    });
+
+    function filtering(type, filter, sort, page) {
+        console.log(type, filter, sort, page);
+    };
+
+    function device_status(msg) {
+    	var dev = deviceslist.items.findItem('name', msg.name);
+
+    	var d = format_device_data(msg);
+    	msg.status = d.status;
+    	msg.ip = d.ip;
+    	msg.last = d.last;
+
+    	if (dev) {
+    		dev.ip = msg.ip;
+    		dev.status = msg.status;
+    		dev.last = msg.last;
+    	} else {    		
+    		deviceslist.items.push(msg);
+    	}
+    	deviceslist.count = deviceslist.items.length || 0;
+
+    	SET('deviceslist', deviceslist);
+    };
+
+    function format_device_data(data) {
+    	var obj = {};
+    	obj.status = '<i class="fa fa-circle {0}"></i> {1}'.format(data.status, data.status);
+    	obj.ip = data.ip ? '<a href="http://{0}" target="_blank">{0}</a>'.format(data.ip) : '';
+    	obj.last = '<span class="datetime" data-value="{0}">{1}</span>'.format(data.last, Tangular.helpers.time(data.last));
+    	return obj;
+    };
+
+    setInterval(function(){
+    	$('.datetime').each(function(){
+    		var $span = $(this);
+    		var dt = $span.attr('data-value');
+    		$span.text(Tangular.helpers.time(dt));
+    	});
+    }, 60 * 1000);
+
+</script>
