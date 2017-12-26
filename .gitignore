@@ -2,3 +2,7 @@
 debug.js
 release.js
 usage.log
+config-debug
+
+node_modules/*
+tmp/*
