@@ -10,6 +10,7 @@ F.path.mkdir(F.path.root('packages'));
 
 repos.wait(function(repo, next){
 
+	console.log('Getting version info "{0}" ...'.format(repo));
 	U.request(repourl.format(repo), [], {}, function(err, res){
 
 		if (err) {
@@ -35,7 +36,7 @@ repos.wait(function(repo, next){
 }, function done(){
 
 	packages.wait(function(package, next){
-
+		console.log('Downloading "{0}" ...'.format(package.name));
 		U.request(packageurl.format(package.name, package.sha), [], {}, function(err, res){
 
 			if (err) {
