@@ -89,8 +89,6 @@ require('total.js').http('release', options);
 	`;
 
 	Fs.writeFileSync(F.path.root('release.js'), contentProd);
-	Fs.writeFileSync(F.path.root('config'), 'module#flow (Object): {url: "/"}');
-
 
 	console.log('Done!\nRun the app with `node debug.js` or `node release.js`')
 };
