@@ -20,6 +20,6 @@ To run the app, there's a few things that need to be done first:
 Now you can run the app `node debug.js`
 
 
-[[https://github.com/molda/ThingsHub/blob/master/imgs/th1.png|alt=Flow]]
-[[https://github.com/molda/ThingsHub/blob/master/imgs/th2.png|alt=DashBoard]]
-[[https://github.com/molda/ThingsHub/blob/master/imgs/th3.png|alt=Devices]]
+![Flow](https://github.com/molda/ThingsHub/blob/master/imgs/th1.png)
+![DashBoard](https://github.com/molda/ThingsHub/blob/master/imgs/th2.png)
+![Devices](https://github.com/molda/ThingsHub/blob/master/imgs/th3.png)
