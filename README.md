@@ -18,3 +18,8 @@ To run the app, there's a few things that need to be done first:
 - run the install script using `node install.js`
 
 Now you can run the app `node debug.js`
+
+
+[[https://github.com/molda/ThingsHub/blob/master/imgs/th1.png|alt=Flow]]
+[[https://github.com/molda/ThingsHub/blob/master/imgs/th2.png|alt=DashBoard]]
+[[https://github.com/molda/ThingsHub/blob/master/imgs/th3.png|alt=Devices]]
