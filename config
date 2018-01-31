@@ -2,8 +2,11 @@ name						: ThingsHub
 version						: 0.1.0
 author						: Martin Smola
 
-total-home-admin			: admin:admin
+thingshub-noauth			: true
+
+#thingshub-admin			: admin:admin
+#thingshub-apikey			: 416a0f7a-0671-11e8-ba89-0ed5f89f718b
 
 #default-ip					: 127.0.0.1
 
-module#flow	(Object)		: { sharedfiles: true }
+module#flow	(Object)		: { backup: true }

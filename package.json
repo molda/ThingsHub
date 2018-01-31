@@ -1,9 +1,15 @@
 {
   "name": "thingshub",
-  "version": "0.0.1",
-  "description": "IoT Managment application",
+  "version": "0.1.0",
+  "description": "Total.js Flow + FlowBoard + DashBoard + some extras",
   "main": "release.js",
+  "dependencies": {
+    "total.js": "2.9.2"
+  },
+  "devDependencies": {},
   "scripts": {
+    "start" : "node release.js",
+    "debug" : "node debug.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -12,12 +18,14 @@
   },
   "keywords": [
     "iot",
-    "flow",
+    "thingshub",
+    "home",
+    "automation",
     "total.js",
-    "dashboard",
-    "flowboard"
+    "flow",
+    "dashboard"
   ],
-  "author": "Martin Smola",
+  "author": "Total.js + smola.martin@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/molda/ThingsHub/issues"

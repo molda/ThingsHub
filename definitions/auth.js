@@ -1,10 +1,13 @@
+if (CONFIG('thingshub-noauth'))
+	return;
+
 // A protection for multiple sign-in
 var protection = {};
 
 F.global.users = [];
 
 // Adds an admin account
-var sa = CONFIG('total-home-admin').split(':');
+var sa = CONFIG('thingshub-admin').split(':');
 F.global.users.push({ name: 'Administrator', login: sa[0], password: sa[1], roles: [], sa: true });
 
 // Optimized for the performance
@@ -32,6 +35,10 @@ F.on('controller', function(controller, name) {
 		controller.req.user = user;
 		return;
 	}
+
+	var apikey = controller.req.headers['ApiKey'];
+	if (apikey === CONFIG('thingshub-apikey'))
+		return;
 
 	if (protection[controller.req.ip])
 		protection[controller.req.ip]++;

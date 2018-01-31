@@ -1,0 +1,58 @@
+<style>
+.dashboardwelcome .tablecell { height: 100%; display: table; width: 100%; color: white; }
+.dashboardwelcome .content { display: table-cell; vertical-align: middle; text-align: center; font-size: 20px; padding: 20px; }
+.dashboardwelcome h1 { font-weight: normal; }
+.dashboardwelcome p { }
+</style>
+
+<script type="text/html" settings>
+	<div class="padding">
+		<div data-jc="multioptions" data-jc-path="?">
+			<script type="text/plain">
+				option('background', 'Background Color', '#967ADC', 'Color');
+			</script>
+		</div>
+	</div>
+</script>
+
+<script type="text/html" body>
+	<div style="height:100%">
+		<div class="tablecell">
+			<div class="content">
+				<h1>Welcome to Total.js <strong>ThingsHub</strong></h1>
+				<p>You can remove this widget and add your own<br>by enabling the edit mode in the top left <small><i class="fa fa-bars"></i></small> menu.</p>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script>
+exports.name = 'welcome';
+exports.title = 'Welcome';
+exports.icon = 'fa-home';
+exports.author = 'Martin Smola';
+exports.group = 'ThingsHub';
+exports.options = { background: '#967ADC' };
+exports.version = '1.0.0';
+
+exports.install = function(instance) {
+
+	instance.reconfigure = function() {
+		var options = instance.options;
+		instance.element.css('background-color', options.background);
+
+		instance.emit('resize', instance.size);
+	};
+
+	instance.on('resize', function(size) {
+		$('.dashboardwelcome .content').css('font-size', ((size.height / 150) * 10) + 'px');
+	});
+
+	instance.make = function() {
+		instance.element.addClass('dashboardwelcome');
+		instance.reconfigure();
+	};
+
+	instance.on('options', instance.reconfigure);
+};
+</script>

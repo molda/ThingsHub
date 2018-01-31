@@ -1,4 +1,3 @@
-//exports.id = 'thingshub_devices';
 exports.version = '0.1';
 exports.title = 'Devices';
 exports.name = 'devices';  // url friendly
@@ -44,7 +43,7 @@ exports.install = function (){
 		DEVICES = JSON.parse(Fs.readFileSync(filename).toString('utf8'));
 		DEVICES.forEach(d => d.offline = true);
 	} catch(e) {
-		console.log('DEVICES - parse error:', e.toString());
+		//console.log('DEVICES - parse error:', e.toString());
 	}
 
 	F.map('/templates/devices.html', '@devices/devices.html');
@@ -80,7 +79,8 @@ exports.devices = () => DEVICES;
 
 exports.device_remove = function(name) {
 	var index = DEVICES.findIndex((item) => item.name === name);
-	DEVICES.splice(index, 1)
+	DEVICES.splice(index, 1);
+	save_devices();
 };
 
 exports.online = function(obj) {
@@ -94,6 +94,7 @@ exports.online = function(obj) {
 		dev.offline = false;
 		dev.date = obj.date;
 		dev.timeout = obj.timeout;
+		dev.battery = obj.battery;
 	}
 
 	TH.send({ addon: exports.name, type: 'device_status', data: obj });
@@ -105,9 +106,9 @@ function check_offline() {
 			return;
 		if (new Date(dev.date).getTime() < (new Date().getTime() - (dev.timeout * 1000))) {
 			dev.offline = true;
-			var instances = FLOW.findByComponent('thingshub_deviceoffline');
+			var instances = FLOW.findByComponent('thingshub_devicestatus');
 			for (var i = instances.length - 1; i >= 0; i--) {
-				instances[i].send2(dev);
+				instances[i].send2(1, dev);
 			}
 			TH.send({ addon: exports.name, type: 'device_status', data: dev });
 		}

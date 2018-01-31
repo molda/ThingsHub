@@ -1,18 +1,19 @@
 <div class="">	
-    <a href="javascript:void(0)" data-exec="pagemenu" class="pagemenu exec"><i class="fa fa-navicon"></i></a>
-    <div class="toolbar">
-        <div class="container">
-            <div class="tabs">
-                <div data-jc="repeater" data-jc-path="common.tabs">
-                    <script type="text/html">
-                        <a href="#{{ linker }}" data-id="{{ id }}" data-b="common.tab" data-b-class="n => (n && n.id === common.tabs[{{ index }}].id ? '+' : '-') + 'selected +tab'">{{ name }}</a>
-                    </script>
-                </div>
-                <a href="javascript:void(0)" class="last exec" data-exec="#tabs.add"><i class="fa fa-plus-circle"></i></a>
-            </div>
-        </div>
-    </div>
+	<a href="javascript:void(0)" data-exec="pagemenu" class="pagemenu exec"><i class="fa fa-navicon"></i></a>
+	<div class="toolbar">
+		<div class="container">
+<!-- 			<div class="tabs">
+				<div data-jc="repeater" data-jc-path="common.tabs">
+					<script type="text/html">
+						<a href="#{{ linker }}" data-id="{{ id }}" data-b="common.tab" data-b-class="n => (n && n.id === common.tabs[{{ index }}].id ? '+' : '-') + 'selected +tab'">{{ name }}</a>
+					</script>
+				</div>
+				<a href="javascript:void(0)" class="last exec" data-exec="#tabs.add"><i class="fa fa-plus-circle"></i></a>
+			</div> -->
+		</div>
+	</div>
 	<div class="container page">
+		<div class="page-title">Devices</div>
 		<div class="row">
 			<div class="col-lg-12 col-md-12">
 				<div data-jc="grid" data-jc-path="deviceslist" data-jc-config="exec:filtering;autosize:false;button:deviceslist_btn_click">
@@ -20,8 +21,9 @@
 						[
 							{ name: 'name', text: 'Device name', filter: false, size: 2, align: 'center' },
 							{ name: 'ip', text: 'IP', filter: false, size: 2, align: 'center', template: '<a href="http://{{ ip }}" target="_blank">{{ ip }}</a>' },
-							{ name: 'offline', text: 'Status', filter: false, size: 3, align: 'center', template: '<i class="fa fa-circle {{ if offline === true }}offline"></i> offline{{else}}online"></i> online{{fi}}' },
+							{ name: 'offline', text: 'Status', filter: false, size: 2, align: 'center', template: '<i class="fa fa-circle {{ if offline === true }}offline"></i> offline{{else}}online"></i> online{{fi}}' },
 							{ name: 'date', text: 'Last status', filter: false, size: 2, format: 'HH:mm dd.MM.yyyy', align: 'center', template: '<span class="datetime" data-value="{{ date }}">{{ date | time }}</span>' },
+							{ name: 'battery', text: 'Battery', filter: false, size: 2,  template: '{{ battery | batt_template }}' },
 							{ name: '@(Options)', align: 'center', filter: false, sort: false, size: '48px', template: '<button class="btn-remove" name="remove" title="@(Remove)"><i class="fa fa-trash-o"></i></button>' }
 						]
 					</script>
@@ -31,64 +33,79 @@
 	</div>
 </div>
 <script>
-    var deviceslist = { page: 1, count: 0, pages: 1, limit: 100, items: [] };
-	ON('message', function(msg){
-        if (msg.addon !== 'devices')
-            return;
-        switch(msg.type) {
-            case 'device_status':
-                device_status(msg.data);
-                break;
-            case 'devices':
-                SET('deviceslist', msg);
-                break;
-        };
+
+	Tangular.register('batt_template', function(value, decimals) {
+		if (value == null)
+			return '';
+		var tmpl = '<div style="color:white;padding-top:2px;width:{0}%;background-color:{1};border-radius:3px;">&nbsp;{2}%</div>';
+		var str = '';
+		if (value > 100)
+			return tmpl.format(100, 'orange', 'Charging');
+		else if (value < 10)
+			return tmpl.format(value, 'red', value);
+		else
+			return tmpl.format(value, 'green', value);
 	});
 
-    FIND('websocket').send({ addon: 'devices', type: 'devices' });
+	var deviceslist = { page: 1, count: 0, pages: 1, limit: 100, items: [] };
+	ON('message', function(msg){
+		if (msg.addon !== 'devices')
+			return;
+		switch(msg.type) {
+			case 'device_status':
+				device_status(msg.data);
+				break;
+			case 'devices':
+				SET('deviceslist', msg);
+				break;
+		};
+	});
 
-    // Auto-resize
-    $(window).on('resize', function() {
-        setTimeout2('resize', function() {
-            EMIT('resize');
-        }, 100);
-    });
+	FIND('websocket').send({ addon: 'devices', type: 'devices' });
 
-    function filtering(type, filter, sort, page) {
-        console.log(type, filter, sort, page);
-    };
+	// Auto-resize
+	$(window).on('resize', function() {
+		setTimeout2('resize', function() {
+			EMIT('resize');
+		}, 100);
+	});
 
-    function device_status(msg) {
-        var dev = deviceslist.items.findItem('name', msg.name);
+	function filtering(type, filter, sort, page) {
+		console.log(type, filter, sort, page);
+	};
 
-        if (dev) {
-            dev.ip = msg.ip;
-            dev.offline = msg.offline;
-            dev.date = msg.date;
-        } else {            
-            deviceslist.items.push(msg);
-        }
+	function device_status(msg) {
+		var dev = deviceslist.items.findItem('name', msg.name);
 
-    	deviceslist.count = deviceslist.items.length || 0;
+		if (dev) {
+			dev.ip = msg.ip;
+			dev.offline = msg.offline;
+			dev.date = msg.date;
+			dev.battery = msg.battery;
+		} else {            
+			deviceslist.items.push(msg);
+		}
 
-    	SET('deviceslist', deviceslist);
-    };
+		deviceslist.count = deviceslist.items.length || 0;
 
-    function deviceslist_btn_click(btn, rowdata, grid) {
-        if (btn.get(0).name === 'remove') {
-            var index = deviceslist.items.findIndex('name', rowdata.name);
-            deviceslist.items.splice(index, 1);
-            UPDATE('deviceslist');
-            FIND('websocket').send({ addon: 'devices', type: 'device_remove', name: rowdata.name });
-        }
-    };
+		SET('deviceslist', deviceslist);
+	};
 
-    setInterval(function(){
-    	$('.datetime').each(function(){
-    		var $span = $(this);
-    		var dt = $span.attr('data-value');
-    		$span.text(Tangular.helpers.time(dt));
-    	});
-    }, 60 * 1000);
+	function deviceslist_btn_click(btn, rowdata, grid) {
+		if (btn.get(0).name === 'remove') {
+			var index = deviceslist.items.findIndex('name', rowdata.name);
+			deviceslist.items.splice(index, 1);
+			UPDATE('deviceslist');
+			FIND('websocket').send({ addon: 'devices', type: 'device_remove', name: rowdata.name });
+		}
+	};
+
+	setInterval(function(){
+		$('.datetime').each(function(){
+			var $span = $(this);
+			var dt = $span.attr('data-value');
+			$span.text(Tangular.helpers.time(dt));
+		});
+	}, 60 * 1000);
 
 </script>

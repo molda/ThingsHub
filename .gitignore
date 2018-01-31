@@ -6,3 +6,10 @@ config-debug
 
 node_modules/*
 tmp/*
+dashboard/barchart.html
+dashboard/designer.json
+dashboard/lastvalue.html
+dashboard/linechart.html
+dashboard/output.html
+dashboard/time.html
+dashboard/weather.html

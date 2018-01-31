@@ -87,7 +87,7 @@ exports.install = function(instance) {
 
 	// keep last day in cache ??
 	var cache = [];
-	var lastdata;
+	var lastdata = { val: null, dt: null };
 	last24hours = {
 		values: [],
 		format: '',
@@ -113,7 +113,9 @@ exports.install = function(instance) {
 			var dec = instance.options.decimals || 0;
 			value = +value.format(dec);
 
-			lastdata = { val: value, dt: new Date().getTime() };
+			lastdata.val = value;
+			lastdata.dt = new Date().getTime();
+			
 			last24hours.values.push(lastdata);
 			// last24hours.median = median(last24hours.values);
 			// var av = 0;
