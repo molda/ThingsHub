@@ -9,11 +9,15 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<meta name="robots" content="all,follow" />
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
+	<meta name=“robots“ content=“noindex, nofollow“>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700&subset=latin,latin-ext" />
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.24.2/codemirror.min.css" />
-	<!-- <link href="/css/dep.min.css" rel="stylesheet" type="text/css" /> -->
-	@{import('head', 'default.css', 'favicon.ico')}
+	@{import('head', 'favicon.ico')}
+	<link href="/css/default.css?v=@{config.version}" rel="stylesheet" type="text/css" />
 	<script>
 		// var managerurl="@{!CONFIG('manager-url')}";
 		// var currency='@{!config.custom.currency_entity}';
@@ -57,12 +61,12 @@
 	<div id="body">
 		<div data-jc="loading" class="ui-loading"></div>
 		<!-- <div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:home;template:/templates/home.html;loading:true"></div> -->
-		<div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:dashboard;template:/templates/dashboard.html"></div>
-		<div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:flow;template:/templates/flow.html"></div>
-		<div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:flowboard;template:/templates/flowboard.html"></div>
-		<!-- <div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:devices;template:/templates/devices.html;loading:true"></div> -->
+		<div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:dashboard;template:/templates/dashboard.html?v=@{config.version}"></div>
+		<div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:flow;template:/templates/flow.html?v=@{config.version}"></div>
+		<div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:flowboard;template:/templates/flowboard.html?v=@{config.version}"></div>
+		<!-- <div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:devices;template:/templates/devices.html?v=@{config.version};loading:true"></div> -->
 		@{foreach a in helpers.addons()}
-		<div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:@{a.value.name};template:/templates/@{a.value.name}.html;loading:true"></div>
+		<div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:@{a.value.name};template:/templates/@{a.value.name}.html?v=@{config.version};loading:true"></div>
 		@{end}
 	</div>
 
@@ -73,13 +77,10 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/htmlmixed/htmlmixed.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/css/css.min.js"></script>
-	<!-- <script src="/js/dep.min.js"></script> -->
-	@{import('default.js')}
+
+	<script src="/js/default.js?v=@{config.version}"></script>
+
 	@{section('script')}
-
-	<script>
-
-	</script>
 
 </body>
 </html>
