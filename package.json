@@ -4,12 +4,15 @@
   "description": "Total.js Flow + FlowBoard + DashBoard + some extras",
   "main": "release.js",
   "dependencies": {
-    "total.js": "2.9.2"
+    "mosca": "^2.8.0",
+    "mqtt": "^2.16.0",
+    "node-schedule": "^1.3.0",
+    "total.js": "^3.0.0-13"
   },
   "devDependencies": {},
   "scripts": {
-    "start" : "node release.js",
-    "debug" : "node debug.js",
+    "start": "node release.js",
+    "debug": "node debug.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
