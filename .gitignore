@@ -9,3 +9,6 @@ flowboard/*
 flow/*
 databases/*
 packages/*
+
+debug.pid
+package-lock.json
