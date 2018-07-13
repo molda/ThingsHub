@@ -95,6 +95,7 @@ exports.online = function(obj) {
 		dev.date = obj.date;
 		dev.timeout = obj.timeout;
 		dev.battery = obj.battery;
+		dev.ip = obj.ip;
 	}
 
 	TH.send({ addon: exports.name, type: 'device_status', data: obj });

@@ -34,10 +34,6 @@ ROUTE('/', function() {
 	SET('common.page', 'dashboard');
 });
 
-ROUTE('/devices/', function() {
-	SET('common.page', 'devices');
-});
-
 
 ON('location', function(url) {
 	url = url.split('/');
@@ -72,18 +68,6 @@ function can(name) {
 	return su.roles.length ? su.roles.indexOf(name) !== -1 : true;
 }
 
-Tangular.register('price', function(value, format) {
-	return currency.format((value || 0).format(format));
-});
-
-Tangular.register('join', function(value, delimiter) {
-	return value instanceof Array ? value.join(delimiter || ', ') : '';
-});
-
-Tangular.register('default', function(value, def) {
-	return value == null || value === '' ? def : value;
-});
-
 function getSelectionStartNode(context){
 	if (!context.getSelection)
 		return;
@@ -93,11 +77,28 @@ function getSelectionStartNode(context){
 }
 
 function mainmenu() {
-	$('header nav').toggleClass('mainmenu-visible');
+	$('header').toggleClass('mainmenu-visible');
 }
 
 ON('location', function() {
-	$('header nav').removeClass('mainmenu-visible');
+	$('header').removeClass('mainmenu-visible');
+});
+
+OPERATION('toggleFullScreen', function () {
+	var doc = window.document;
+	var docEl = doc.documentElement;
+
+	var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+	var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+	if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+		requestFullScreen.call(docEl);
+		$('.zindex').css('z-index', 0);
+	}
+	else {
+		cancelFullScreen.call(doc);
+		$('.zindex').css('z-index', -1);
+	}
 });
 
 Tangular.register('time', function(value) {
@@ -124,4 +125,16 @@ Tangular.register('time', function(value) {
 
     var years = (months / 12) >> 0;
     return years + ' ' + Tangular.helpers.pluralize(years, 'years', 'year', 'years', 'years') + ' ago';
+});
+
+Tangular.register('price', function(value, format) {
+	return currency.format((value || 0).format(format));
+});
+
+Tangular.register('join', function(value, delimiter) {
+	return value instanceof Array ? value.join(delimiter || ', ') : '';
+});
+
+Tangular.register('default', function(value, def) {
+	return value == null || value === '' ? def : value;
 });

@@ -9,4 +9,4 @@ thingshub-noauth			: true
 
 #default-ip					: 127.0.0.1
 
-module#flow	(Object)		: { backup: true }
+module#flow	(object)		: { backup: true, crashmode: false }

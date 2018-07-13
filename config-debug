@@ -1,1 +1,2 @@
 #allow-debug				: true
+module#flow	(object)		: { debug: true }

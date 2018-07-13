@@ -16,7 +16,7 @@ exports.html = `<div class="padding">
 			<div class="help m">@(Offline status will be reported if no data is recieved after timeout. 0 = ignore)</div>
 		</div>
 		<div class="col-md-3">
-			<div data-jc="textbox" data-jc-path="batxmin" data-jc-config="placeholder:3.5;type:number;increment:true;align:center">@(Battery empty voltage)</div>
+			<div data-jc="textbox" data-jc-path="battmin" data-jc-config="placeholder:3.5;type:number;increment:true;align:center">@(Battery empty voltage)</div>
 			<div class="help m">@()</div>
 		</div>
 		<div class="col-md-3">

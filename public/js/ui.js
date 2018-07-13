@@ -3941,7 +3941,7 @@ COMPONENT('page', function(self, config) {
             return;
         }
 
-        config.loading && SETTER('loading', 'show');
+        config.loading === 'true' && SETTER('loading', 'show');
         type = 1;
 
         self.import(config.template, function() {

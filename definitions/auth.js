@@ -30,19 +30,19 @@ F.on('controller', function(controller, name) {
 	if (protection[controller.req.ip] > 10) {
 		controller.throw401();
 		controller.cancel();
+		console.log('auth.js: protection kicked in for ip:', controller.req.ip);
 		return;
 	}
 
 	var user = F.global.users[controller.req.cookie('__admin')];
 
-	console.log('USER', user);
 	if (user) {
 		controller.req.user = user;
 		return;
 	}
 
 	var apikey = controller.req.headers['ApiKey'];
-	if (apikey === CONFIG('thingshub-apikey'))
+	if (apikey && apikey === CONFIG('thingshub-apikey'))
 		return;
 
 	if (protection[controller.req.ip])

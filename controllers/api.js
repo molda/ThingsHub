@@ -1,6 +1,6 @@
 exports.install = function() {
 
-	F.websocket('/', websocket, ['authorize', 'json']);
+	F.websocket('/thingshub', websocket, ['authorize', 'json']);
 };
 
 function websocket() {

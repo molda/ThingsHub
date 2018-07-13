@@ -34,32 +34,38 @@
 	<div data-jc="autocomplete"></div>
 	<div data-jc="contextmenu"></div>
 	<div data-jc="confirm"></div>
-	<div data-jc="websocket" data-jc-config="url:/"></div>
+	<div data-jc="websocket" data-jc-config="url:/thingshub"></div>
 	
 	<!-- <div data-jc="loading" class="ui-loading"></div> -->
 	<!-- <div data-jc="mqtt" data-jc-config="url:ws\://192.168.0.103\:1884"></div> -->
 	<!-- <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script> -->
 
+	<div id="mainmenumobile">
+		<a href="javascript:void(0)" data-exec="mainmenu" class="exec mainmenumobile-button"><i class="fa fa-2x fa-navicon"></i></a>
+	</div>
 	<header>
-		<div class="mainmenu">
+<!-- 		<div class="mainmenu">
 			<div><b>@{config.name}</b> v@{config.version}</div>
 			<a href="javascript:void(0)" data-exec="mainmenu" class="exec mainmenu-button"><i class="fa fa-navicon"></i></a>
-		</div>
+		</div> -->
+		<div class="nameversion"><b>@{config.name}</b> v@{config.version}</div>
 		<nav>
-			<!-- <a class="jrouting" href="/" title="@{config.name}"><i class="fa fa-home"></i></a> -->
-			<a class="jrouting" href="/" title="DashBoard"><i class="fa fa-th"></i></a>
-			<a class="jrouting" href="/flowboard/" title="FlowBoard"><i class="fa fa-dashboard"></i></a>
-			<a class="jrouting" href="/flow/" title="Flow"><i class="fa fa-terminal"></i></a>
+			<a class="jrouting" href="/" title="DashBoard"><i class="fa fa-th"></i><span>DashBoard</span></a>
+			<a class="jrouting" href="/flowboard/" title="FlowBoard"><i class="fa fa-dashboard"></i><span>FlowBoard</span></a>
+			<a class="jrouting" href="/flow/" title="Flow"><i class="fa fa-terminal"></i><span>Flow</span></a>
 			@{foreach a in helpers.addons()}
-			<a class="jrouting" href="/@{a.value.name}/" title="@{a.value.title}"><i class="fa @{a.value.icon}"></i></a>
+			<a class="jrouting" href="/@{a.value.name}/" title="@{a.value.title}"><i class="fa @{a.value.icon}"></i><span>@{a.value.title}</span></a>
 			@{end}
-			<!-- <a class="jrouting" href="/devices/" title="Devices"><i class="fa fa-list-alt"></i></a> -->
-			<a class="logoff" href="/logoff/" title="@(Sign out)"><i class="fa fa-sign-out"></i></a>
+			<div class="bottom">
+				<a class="exec" href="#" title="@(Toggle fullscreen)" data-exec="#toggleFullScreen"><i class="fa fa-arrows-alt"></i><span>@(Toogle fullscreen)</span></a>
+				<a class="logoff" href="/logoff/" title="@(Sign out)"><i class="fa fa-sign-out"></i><span>@(Sign out)</span></a>
+			</div>
 		</nav>
 	</header>
+	
 
 	<div id="body">
-		<div data-jc="loading" class="ui-loading"></div>
+		<div data-jc="loading" class="ui-loading hidden"></div>
 		<!-- <div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:home;template:/templates/home.html;loading:true"></div> -->
 		<div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:dashboard;template:/templates/dashboard.html?v=@{config.version}"></div>
 		<div data-jc="page" class="hidden" data-jc-path="common.page" data-jc-config="if:flow;template:/templates/flow.html?v=@{config.version}"></div>
@@ -81,6 +87,14 @@
 	<script src="/js/default.js?v=@{config.version}"></script>
 
 	@{section('script')}
+
+	<script>
+		@{foreach a in helpers.addons()}
+		ROUTE('/@{a.value.name}/', function() {
+			SET('common.page', '@{a.value.name}');
+		});
+		@{end}
+	</script>
 
 </body>
 </html>
