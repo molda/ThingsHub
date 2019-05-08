@@ -26,6 +26,10 @@ F.global.users = users;
 // Simple auth for administration
 F.on('controller', function(controller, name) {
 
+
+	if (controller.url === '/token' || controller.url === '/auth')
+		return;
+
 	// Checks protection
 	if (protection[controller.req.ip] > 10) {
 		controller.throw401();

@@ -84,7 +84,7 @@ ON('location', function() {
 	$('header').removeClass('mainmenu-visible');
 });
 
-OPERATION('toggleFullScreen', function () {
+function toggleFullScreen() {
 	var doc = window.document;
 	var docEl = doc.documentElement;
 
@@ -93,13 +93,13 @@ OPERATION('toggleFullScreen', function () {
 
 	if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
 		requestFullScreen.call(docEl);
-		$('.zindex').css('z-index', 0);
+		//$('.zindex').css('z-index', 0);
 	}
 	else {
 		cancelFullScreen.call(doc);
-		$('.zindex').css('z-index', -1);
+		//$('.zindex').css('z-index', -1);
 	}
-});
+};
 
 Tangular.register('time', function(value) {
     var diff = Date.now() - (value instanceof Date ? value : value.parseDate()).getTime();

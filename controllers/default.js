@@ -2,9 +2,10 @@ exports.install = function() {
 
 	F.route('/*', 'index');
 
+
 	F.route('/login/',		redirect_login, ['post']);
 	F.route('/logoff/',		redirect_logoff);
-}
+};
 
 function redirect_login() {
 	this.redirect('/');

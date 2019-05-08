@@ -9,10 +9,10 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<meta name="robots" content="all,follow" />
-	<meta http-equiv='cache-control' content='no-cache'>
-	<meta http-equiv='expires' content='0'>
-	<meta http-equiv='pragma' content='no-cache'>
-	<meta name=“robots“ content=“noindex, nofollow“>
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta name="robots" content="noindex, nofollow">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700&subset=latin,latin-ext" />
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.24.2/codemirror.min.css" />
@@ -35,7 +35,7 @@
 	<div data-jc="contextmenu"></div>
 	<div data-jc="confirm"></div>
 	<div data-jc="websocket" data-jc-config="url:/thingshub"></div>
-	
+
 	<!-- <div data-jc="loading" class="ui-loading"></div> -->
 	<!-- <div data-jc="mqtt" data-jc-config="url:ws\://192.168.0.103\:1884"></div> -->
 	<!-- <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script> -->
@@ -57,12 +57,12 @@
 			<a class="jrouting" href="/@{a.value.name}/" title="@{a.value.title}"><i class="fa @{a.value.icon}"></i><span>@{a.value.title}</span></a>
 			@{end}
 			<div class="bottom">
-				<a class="exec" href="#" title="@(Toggle fullscreen)" data-exec="#toggleFullScreen"><i class="fa fa-arrows-alt"></i><span>@(Toogle fullscreen)</span></a>
+				<a class="exec" href="#" title="@(Toggle fullscreen)" data-exec="toggleFullScreen"><i class="fa fa-arrows-alt"></i><span>@(Toogle fullscreen)</span></a>
 				<a class="logoff" href="/logoff/" title="@(Sign out)"><i class="fa fa-sign-out"></i><span>@(Sign out)</span></a>
 			</div>
 		</nav>
 	</header>
-	
+
 
 	<div id="body">
 		<div data-jc="loading" class="ui-loading hidden"></div>

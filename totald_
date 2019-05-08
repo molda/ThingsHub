@@ -62,7 +62,7 @@ function runapp() {
 	!options && (options = {});
 	options.directory = process.cwd();
 
-	require('../lib/node_modules/total.js');
+	require('total.js');
 
 	var port = parseInt(process.argv[process.argv.length - 1]);
 
@@ -87,7 +87,7 @@ function runwatching() {
 
 	!options && (options = {});
 	//require('./index');
-	require('../lib/node_modules/total.js');
+	require('total.js');
 
 	//const FILENAME = U.getName(process.argv[1]);
 	const FILENAME = module.filename;
